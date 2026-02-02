@@ -7,10 +7,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main >
-        <Header />
+    
+     <div>
+         <Header />
         <Sidebar />
+        <main  className=" w-full pt-18 min-h-screen">
       {children}
     </main>
+     </div>
   );
 }

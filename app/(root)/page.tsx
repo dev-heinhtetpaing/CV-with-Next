@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import HeroSection from "../components/home/hero-section";
 import SecondSection from "../components/home/second-section";
 import ThirdSection from "../components/home/third-section";
