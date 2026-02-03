@@ -5,130 +5,130 @@ import { useGSAP } from "@gsap/react";
 import MotionPathPlugin from "gsap/MotionPathPlugin";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import gsap from "gsap";
+import { useMediaQuery } from "react-responsive";
+import {Badge} from "@/components/ui/badge";
+import {  personalInfo } from "@/lib/data";
+
 const HeroSection = () => {
-gsap.registerPlugin(ScrollTrigger,MotionPathPlugin);
+  // const badgeContainer=document.querySelector(".badges-container");
+  const mobileWidth = useMediaQuery({ query: "(max-width: 768px)" });
+  gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
   const sectionRef = useRef<HTMLDivElement>(null);
-
-  // console.log(sectionRef)
-
+  const badgesContainerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const start="top top"
-    const end="bottom+=200"
-    const MasterTimeline=gsap.timeline({
+    const start = "top top"
+    const end = "bottom+=200"
+    const containerSize={
+      width: badgesContainerRef?.current?.offsetWidth || 0,
+      height: badgesContainerRef?.current?.offsetHeight || 0
+    }
+    const b1Size={width:document.querySelector(".b1")?.getBoundingClientRect().width || 0,height:document.querySelector(".b1")?.getBoundingClientRect().height || 0};
+    const endPoint = mobileWidth ? { x: 0, y: containerSize.width-b1Size.width || 0 } : { x: -((containerSize.width-b1Size.width || 0)/1.5  || 0), y: -(containerSize.height+b1Size.height/4) || 0 };
+    const midPoint=mobileWidth ? { x: 0, y: containerSize.width/2-b1Size.width/2 || 0 } : { x: -((containerSize.width+b1Size.width || 0) /5  || 0), y: -(containerSize.height/2+b1Size.height*2) || 0 };
+    const startPoint={x: -(b1Size.width || 0),y:-(2*b1Size.height || 0)};
+    const initialPoint={x:0,y:0};
+
+
+    const MasterTimeline = gsap.timeline({
       scrollTrigger: {
         trigger: sectionRef.current,
         start: start,
         end: end,
-        pin:true,
+        pin: true,
         scrub: true,
         markers: true,
+        
       }
     })
-    // MasterTimeline.from(".badge", {
-    //   opacity: 0,
-    //   y: 20,
-    //   stagger: 0.2
-    // })
-  
-    .from(".b1", {
-      motionPath: {
-        path: [
-          { x: "100%", y: "100%" },
-          { x: "100%", y: "100%" },
-          { x: "100%", y: "100%" }
-        ],
-        curviness: 1.5
-      },
-      duration: 1,
-      ease: "power2.inOut"
-    })
-  
-    .from(".b2", {
-      motionPath: {
-        path: [
-          { x: 0, y: 0 },
-          { x: -60, y: -40 },
-          { x: -120, y: -120 }
-        ],
-        curviness: 1.5
-      }
-    }, "<") // overlap
-  
-    .from(".b3", {
-      motionPath: {
-        path: [
-          { x: 0, y: 0 },
-          { x: -80, y: -60 },
-          { x: -160, y: -160 }
-        ],
-        curviness: 1.5
-      }
-    }, "<") // overlap
-
-    const badges=document.querySelector(".badges-container");
-    if(!badges){
-      return;
-    }
-    const onLoad=()=> {
-      MasterTimeline.to(".badge", {
-        y: "-=100",
-        duration: 1,
-        stagger: 0.1,
-        ease: "power2.inOut"
-      });
-     }
-     
-    // sectionRef.current?.addEventListener("scroll", ()=>{console.log("scroll")});
-   
     
-  },{scope:sectionRef});
+
+      MasterTimeline.to(".b1", {
+        motionPath: {
+          path: [
+            initialPoint,
+            // startPoint,
+            midPoint,
+            endPoint
+          ],
+          curviness: 1.5
+        },
+        opacity: 1,
+        duration: 1,
+        ease: "power2.inOut"
+      }).to(".b2", {
+        motionPath: {
+          path: [
+            initialPoint,
+            // startPoint,
+            midPoint,
+          ],
+          curviness: 1.5
+        },
+        opacity: 1,
+        duration: 1,
+        ease: "power2.inOut"
+      },).to(".b3", {
+        motionPath: {
+          path: [
+            initialPoint,
+            startPoint,
+          ],
+          curviness: 1.5
+        },
+        opacity: 1,
+        duration: 1,
+        ease: "power2.inOut"
+      }, ) // overlap
+
+ 
+
+
+  }, { scope: sectionRef });
   return (
-    <div ref={sectionRef} className="w-full  h-full min-h-[calc(100vh-64px)] relative ">
-      <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto sm:px-10 md:px-10">Hein Htet Paing</h1>
-      <section className="container mx-auto">
-        <p className="text-sm sm:text-base text-center  leading-relaxed tracking-normal sm:leading-loose sm:tracking-wide sm:text-left container text-muted-foreground mx-auto sm:px-10 md:px-10">Full-stack web developer with hands-on experience building, deploying, and maintaining production-grade,
-SEO-optimized web applications using React, Next.js, Node.js, and TypeScript. Proven ability to migrate
-legacy systems to modern architectures, design scalable APIs, and manage cloud/VPS deployments using
-Docker, Nginx, and CI/CD pipelines. Strong focus on performance, clean architecture, and real-world
-business impact.</p>
+    <div ref={sectionRef} className="w-full h-full min-h-screen relative sm:py-20 py-10 ">
+      <main className="sm:w-1/2 w-full sm:ml-auto  ">
+      <div className="mx-5 sm:mx-15 space-y-5">
+      <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">Hein Htet Paing</h1>
+      <section className="container mx-auto space-y-5">
+        <p className="text-sm sm:text-base text-center  leading-loose tracking-normal sm:leading-loose sm:tracking-wide sm:text-left container text-muted-foreground mx-auto ">{personalInfo.objectives}</p>
+          <div className="container mx-auto flex gap-2 justify-center items-center sm:justify-start">
+          {personalInfo.cta.map(cta=><Badge key={cta.label}  className="cursor-pointer ">{cta.label}</Badge>)}
+          </div>
       </section>
-      
-      <div className="absolute bottom-0  left-[-22] md:left-15 sm:left-10 lg:left-25">
-<Image src="/hein.png" alt="hero-section" className=" h-[85vh] w-full object-cover mx-auto object-bottom" width={1000} height={1000} />
-</div>
-<div className="absolute bottom-0  left-0 md:left-15 sm:left-10 xl:left-25 sm:w-4/5 w-full  xl:w-1/2 h-2/3 ">
-  <div className="relative w-full h-full  bg-red-300">
-  {/* <div className="absolute bottom-0 right-0 "> */}
-  <div className="badge b1 w-1/4 h-1/4 bg-blue-500">
-    <p>React</p>
-  </div>
-  <div className="badge b2 w-1/4 h-1/4 bg-green-500">
-    <p>Next.js</p>
-  </div>
-  <div className="badge b3 w-1/4 h-1/4 bg-yellow-500">
-    <p>Node.js</p>
-  {/* </div> */}
-  </div>
-  </div>
+      </div>
+   
+      </main>
 
-</div>
+    <div className="absolute bottom-0 h-[80vh] w-full 
+     ">
+        <div className="relative h-full w-full sm:w-1/2 mr-auto">
+        <Image src="/hein.png" alt="Hein's Image" className=" object-cover " fill={true} />
+        </div>
+      </div>
+      <div className="absolute bottom-0  left-0 md:left-15 sm:left-10 xl:left-25 sm:w-1/2 w-full  xl:w-1/2 h-2/3 ">
+        <div className="relative w-full h-full " ref={badgesContainerRef}>
+          {/* <div className="absolute bottom-0 right-0 "> */}
+          <div className="absolute badge bottom-0 opacity-0 right-0 b1 w-18 h-18 shadow-lg rounded-full border-2 border-gray-200">
+            <Image src="/icon-nextjs.svg" alt="Next.js" fill className="p-2"  />
+            {/* <link rel="icon" href="/icon?next.svg" type="image/svg" /> */}
+            
+          </div>
+          <div className="absolute badge bottom-0 opacity-0 right-0 b2 w-18 h-18 shadow-lg rounded-full border-2 border-gray-200">
+            <Image src="/icon-react.svg" alt="React" fill className="p-2"  />
+          </div>
+          <div className="absolute badge bottom-0 opacity-0 right-0 b3 w-18 h-18 shadow-lg rounded-full border-2 border-gray-200">
+            <Image src="/icon-nodejs.svg" alt="Node.js" fill className="p-2"  />
+            {/* </div> */}
+          </div>
 
-{/* <div className="absolute bottom-0  left-0 md:left-15 sm:left-10 xl:left-25 sm:w-4/5 w-full  xl:w-1/2 h-2/3 ">
-  <div className="w-full h-full relative">
-  <div className="bg-blue-500 w-1/4 h-1/4 absolute  top-1/2  right-0 -translate-y-1/2 sm:top-0 sm:right-1/3 sm:translate-x-1/3">
-    <p>React</p>
-  </div>
-  <div className="bg-green-500 w-1/4 h-1/4 absolute bottom-1/2 translate-y-1/2  right-0 ">
-    <p>Next.js</p>
-  </div>
-  <div className="bg-yellow-500 w-1/4 h-1/4 absolute  right-0 bottom-1/2 translate-y-1/2 sm:translate-y-0 sm:bottom-0 sm:right-0">
-    <p>Node.js</p>
-  </div>
-  </div>
-</div> */}
 
-  </div>
+      </div>
+    </div>
+
+     
+
+    </div>
   );
 };
 

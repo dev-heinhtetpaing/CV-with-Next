@@ -11,7 +11,7 @@ export default function RootLayout({
      <div>
          <Header />
         <Sidebar />
-        <main  className=" w-full pt-18 min-h-screen">
+        <main  className=" w-full  min-h-screen">
       {children}
     </main>
      </div>
