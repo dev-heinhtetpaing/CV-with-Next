@@ -125,3 +125,29 @@
   }
 }
 
+
+.layer {
+  @apply  h-screen min-h-screen ;
+}
+
+.mask-image {
+ mask-image: url("/icon-react.svg");
+ mask-position:center;
+ mask-size: 50%;
+ mask-repeat: no-repeat;
+}
+
+.radial-gradient {
+  background: radial-gradient( circle at center,
+  #434343 0%,
+  #000 50%,
+  transparent 100%);
+}
+
+.mask-container {
+  @apply block ;
+}
+.mask-content {
+  @apply text-white text-2xl font-bold hidden;
+}
+
