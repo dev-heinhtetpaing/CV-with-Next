@@ -86,10 +86,6 @@ const HeroSection = () => {
       duration: 1,
       ease: "power2.inOut"
     },) // overlap
-
-
-
-
   }, { scope: sectionRef });
   return (
     <div  ref={sectionRef} id="hero-section" className="w-full  min-h-screen relative sm:py-20 py-10 snap-start">

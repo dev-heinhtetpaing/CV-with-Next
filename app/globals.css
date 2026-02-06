@@ -133,21 +133,24 @@
 .mask-image {
  mask-image: url("/icon-react.svg");
  mask-position:center;
- mask-size: 50%;
+ mask-size: 15%;
  mask-repeat: no-repeat;
+ x:50%;
+ translate-x:50%;
+
 }
 
 .radial-gradient {
   background: radial-gradient( circle at center,
-  #434343 0%,
+  #434343 10%,
   #000 50%,
   transparent 100%);
 }
 
 .mask-container {
-  @apply block ;
-}
-.mask-content {
-  @apply text-white text-2xl font-bold hidden;
+  @apply mx-auto relative w-full h-full flex items-center;
 }
 
+.mask-content {
+  @apply text-muted-foreground opacity-0;
+}
