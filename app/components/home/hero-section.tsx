@@ -24,7 +24,7 @@ const HeroSection = () => {
 
   useGSAP(() => {
     const start = "top top"
-    const end = "bottom+=200"
+    const end = "bottom+=50"
     const containerSize = {
       width: badgesContainerRef?.current?.offsetWidth || 0,
       height: badgesContainerRef?.current?.offsetHeight || 0

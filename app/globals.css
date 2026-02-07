@@ -133,24 +133,29 @@
 .mask-image {
  mask-image: url("/icon-react.svg");
  mask-position:center;
- mask-size: 15%;
+ mask-size: 100%;
  mask-repeat: no-repeat;
- x:50%;
- translate-x:50%;
-
+width:"50%";
+height:"50%";
+position:"absolute";
+top:0;
+left:0;
+right:0;
+bottom:0;
+z-index:10;
 }
 
 .radial-gradient {
   background: radial-gradient( circle at center,
   #434343 10%,
   #000 50%,
-  transparent 100%);
+  transparent 100%); 
 }
 
 .mask-container {
-  @apply mx-auto relative w-full h-full flex items-center;
+  @apply mx-auto relative w-full h-full flex-col justify-center  items-center;
 }
 
 .mask-content {
-  @apply text-muted-foreground opacity-0;
+  @apply text-muted-foreground w-1/2 h-1/2 px-8 sm:px-16;
 }
