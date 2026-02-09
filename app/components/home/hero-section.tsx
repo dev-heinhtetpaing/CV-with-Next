@@ -44,7 +44,7 @@ const HeroSection = () => {
         end: end,
         pin: true,
         scrub: true,
-        // markers: true,
+        markers: true,
       }
     })
 
@@ -88,7 +88,7 @@ const HeroSection = () => {
     },) // overlap
   }, { scope: sectionRef });
   return (
-    <div  ref={sectionRef} id="hero-section" className="w-full  min-h-screen relative sm:py-20 py-10 snap-start">
+    <div  ref={sectionRef} id="hero-section" className="w-full  layer relative sm:py-20 py-10 snap-start radial-gradient">
       <main className="sm:w-1/2 w-full sm:ml-auto  ">
         <div className="mx-5 sm:mx-15 space-y-5">
           <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">Hein Htet Paing</h1>

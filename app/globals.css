@@ -135,27 +135,35 @@
  mask-position:center;
  mask-size: 100%;
  mask-repeat: no-repeat;
-width:"50%";
-height:"50%";
+width:100%;
+height:100%;
 position:"absolute";
-top:0;
-left:0;
-right:0;
-bottom:0;
-z-index:10;
+background-color: transparent;
+z-index:12;
+
 }
 
 .radial-gradient {
   background: radial-gradient( circle at center,
-  #434343 10%,
-  #000 50%,
+  #434343 20%,
+  #000 100%,
   transparent 100%); 
 }
 
 .mask-container {
-  @apply mx-auto relative w-full h-full flex-col justify-center  items-center;
+  @apply mx-auto relative w-full h-full flex sm:flex-row justify-center  items-center my-0 ;
+}
+
+.mask-image-container {
+  background-image: url("/hein-bg.png");
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  width: 50%;
+  height: 50%;
+  @apply rounded-lg relative z-10;
 }
 
 .mask-content {
-  @apply text-muted-foreground w-1/2 h-1/2 px-8 sm:px-16;
+  @apply text-muted-foreground w-1/2 h-1/2 px-8 sm:px-16 overflow-hidden;
 }

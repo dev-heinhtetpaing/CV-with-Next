@@ -6,7 +6,7 @@ import ThirdSection from "../components/home/third-section";
 export default function Home() {
   
   return (
-    <div className="relative w-full radial-gradient ">
+    <div className="relative w-full bg-black/80 ">
   <HeroSection />
   <AboutSection />
   <ThirdSection />

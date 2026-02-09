@@ -1,16 +1,16 @@
 "use client";
 import { useGSAP } from "@gsap/react";
-import Image from "next/image";
 import { useRef } from "react";
-// import { useMediaQuery } from "react-responsive";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
 import { useMediaQuery } from "react-responsive";
+import { personalInfo } from "@/lib/data";
+
 
 const AboutSection = () => {
-  // const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
+  
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery({ query: "(max-width: 460px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 390px)" });
   useGSAP(() => {
     if (!sectionRef.current) return;
 
@@ -36,39 +36,33 @@ const AboutSection = () => {
       ease: "power1.inOut"
     })
     scrollTimeline
+    .from(".mask-image", {
+      duration: 0.8,
+      rotate: 180,
+      opacity: 1,
+      zIndex: 11,
+      backgroundColor: "#61dbfb",
+      maskSize: "20%",
+      ease: "power1.inOut",
+    },).to(".mask-image", {
+      maskImage: "none",
+      ease: "power1.inOut",
+      duration: 0.1,
+    },)
+    .from(".mask-image-container", {
+      backgroundImage: "none",
+      duration: 0.1,
+      ease: "power1.inOut",
+    },"<")
       .from(".mask-image-container", {
-        duration: 1,
-        maskSize: "25%",
+        duration: 0.5,
         x: isMobile ? "0%" : "50%",
         translateX: isMobile ? "0%" : "-50%",
-        maskPosition: "center",
-        ease: "power1.inOut",
-      })
-      .from([".mask-image",".image"], {
-        duration: 2,
-        rotate: 180,
-        maskSize: "20%",
-        ease: "power1.inOut",
-        
-      }, )
-      // .to(".image", {
-      //   opacity: 1,
-      //   duration: 0.5,
-      //   ease: "power1.inOut",
-      // }, "<0.3")
-      .to(".mask-image", {
-        maskImage: "none",
-        duration: 1,
         ease: "power1.inOut",
       },)
-      .to(".mask-container", {
-        gap: 10,
-        ease: "power1.inOut",
-        duration: 0.6,
-      }, )
       .from(".mask-content", {
         opacity: 0,
-        duration: 0.8,
+        duration: 0.4,
         x: 100,
         ease: "power2.out",
       }, );
@@ -81,29 +75,25 @@ const AboutSection = () => {
     };
   }, { scope: sectionRef, dependencies: [] })
   return (
-    <div ref={sectionRef} id="about-section" className="relative min-h-screen w-full" >
-      <div className="w-full h-screen min-h-screen relative container mx-auto  ">
+    <div ref={sectionRef} id="about-section" className="relative layer w-full radial-gradient" >
+      <div className="w-full layer relative container mx-auto  ">
         <div className="mask-container  ">
-          <div className="mask-image-container  w-1/2 mx-auto items-center px-10 h-[512px] aspect-square relative">
-
-            <Image className="rounded-lg mask-image image" src="/hein-bg.png" alt="About" fill />
-            
+          <div className="mask-image-container">
+          <div className="mask-image">
           </div>
-
+          </div>
           <div className=" mask-content ">
-            <p><span>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exercitationem consequatur quo nemo, praesentium labore vero laudantium iure optio debitis. Error quis sequi consequatur cum, optio odit facere accusamus. Reprehenderit, commodi.</span><span>Provident amet distinctio rerum adipisci repudiandae voluptatum temporibus nihil, tempora laboriosam facilis aspernatur corrupti rem maxime iusto itaque dolorem sequi maiores, quaerat facere? Quaerat dolorum similique eos dignissimos tenetur porro.</span></p>
+          <div className=" space-y-5">
+          <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">Hein Htet Paing</h1>
+          <section className="container mx-auto space-y-5">
+            <p className="text-sm sm:text-base text-center  leading-loose tracking-normal sm:leading-loose sm:tracking-wide sm:text-left container text-muted-foreground mx-auto ">{personalInfo.objectives}</p>
+            <div className="container mx-auto flex gap-2 justify-center items-center sm:justify-start">
+            </div>
+          </section>
+        </div>
           </div>
         </div>
-        {/* <div className="layer ">
-        <h1>
-         layer 2
-        </h1>
-      </div>
-      <div className="layer ">
-        <h1>
-         layer 3
-        </h1>
-      </div> */}
+        
       </div>
     </div>
   );
