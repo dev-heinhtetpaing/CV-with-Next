@@ -127,7 +127,7 @@
 
 
 .layer {
-  @apply  h-screen min-h-screen ;
+  @apply  h-screen min-h-screen mx-0 px-0;
 }
 
 .mask-image {
@@ -151,7 +151,7 @@ z-index:12;
 }
 
 .mask-container {
-  @apply mx-auto relative w-full h-full flex sm:flex-row justify-center  items-center my-0 ;
+  @apply mx-auto relative w-full h-full flex flex-col sm:flex-row justify-center  items-center my-0 ;
 }
 
 .mask-image-container {
@@ -159,11 +159,11 @@ z-index:12;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
-  width: 50%;
-  height: 50%;
-  @apply rounded-lg relative z-10;
+  /* width: 50%;
+  height: 50%; */
+  @apply w-[90%] h-[50%] sm:w-1/2 rounded-lg relative z-10 mx-auto;
 }
 
 .mask-content {
-  @apply text-muted-foreground w-1/2 h-1/2 px-8 sm:px-16 overflow-hidden;
+  @apply text-muted-foreground w-full sm:w-1/2 h-1/2 px-8 sm:px-16 overflow-hidden;
 }

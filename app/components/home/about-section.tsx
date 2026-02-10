@@ -10,14 +10,14 @@ import { personalInfo } from "@/lib/data";
 const AboutSection = () => {
   
   const sectionRef = useRef<HTMLDivElement>(null);
-  const isMobile = useMediaQuery({ query: "(max-width: 390px)" });
+  const isMobile = useMediaQuery({ query: "(max-width: 760px)" });
   useGSAP(() => {
     if (!sectionRef.current) return;
 
     // Register ScrollTrigger plugin
     gsap.registerPlugin(ScrollTrigger);
 
-    const start = isMobile ? "top 50%" : "top top";
+    const start = "top top";
     const end =  "bottom+=50";
 
     const scrollTimeline = gsap.timeline({
@@ -31,6 +31,7 @@ const AboutSection = () => {
         markers: false, // Disabled for production
         invalidateOnRefresh: true, // Recalculate on resize
         refreshPriority: 0, // Standard refresh priority
+       
       },
       
       ease: "power1.inOut"
@@ -52,6 +53,8 @@ const AboutSection = () => {
     .from(".mask-image-container", {
       backgroundImage: "none",
       duration: 0.1,
+      y:isMobile ? "50%" : "0%",
+      backgroundColor: "blue",
       ease: "power1.inOut",
     },"<")
       .from(".mask-image-container", {
@@ -67,7 +70,7 @@ const AboutSection = () => {
         ease: "power2.out",
       }, );
 
-    // Cleanup function - useGSAP handles most cleanup, but we ensure ScrollTrigger is properly cleaned up
+    
     return () => {
       if (scrollTimeline) {
         scrollTimeline.kill();
@@ -75,8 +78,8 @@ const AboutSection = () => {
     };
   }, { scope: sectionRef, dependencies: [] })
   return (
-    <div ref={sectionRef} id="about-section" className="relative layer w-full radial-gradient" >
-      <div className="w-full layer relative container mx-auto  ">
+    <div ref={sectionRef} id="about-section" className="relative layer w-full  radial-gradient snap-start " >
+      <div className=" h-full ">
         <div className="mask-container  ">
           <div className="mask-image-container">
           <div className="mask-image">
@@ -84,7 +87,7 @@ const AboutSection = () => {
           </div>
           <div className=" mask-content ">
           <div className=" space-y-5">
-          <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">Hein Htet Paing</h1>
+          <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">{personalInfo.name}</h1>
           <section className="container mx-auto space-y-5">
             <p className="text-sm sm:text-base text-center  leading-loose tracking-normal sm:leading-loose sm:tracking-wide sm:text-left container text-muted-foreground mx-auto ">{personalInfo.objectives}</p>
             <div className="container mx-auto flex gap-2 justify-center items-center sm:justify-start">
