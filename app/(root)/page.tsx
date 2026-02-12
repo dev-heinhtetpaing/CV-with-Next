@@ -1,15 +1,7 @@
 
-import HeroSection from "../components/home/hero-section";
-import AboutSection from "../components/home/about-section";
-import ThirdSection from "../components/home/third-section";
-
-export default function Home() {
-  
+import Home from "../components/home";
+export default function HomePage() {
   return (
-    <div className="relative w-full bg-black/80 ">
-  <HeroSection />
-  <AboutSection />
-  <ThirdSection />
-</div>
+    <Home/>
   );
 }

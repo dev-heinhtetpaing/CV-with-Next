@@ -7,7 +7,7 @@ import { useMediaQuery } from "react-responsive";
 import { personalInfo } from "@/lib/data";
 
 
-const AboutSection = () => {
+const AboutSection = ({ref}:{ref:React.RefObject<HTMLDivElement | null>}) => {
   
   const sectionRef = useRef<HTMLDivElement>(null);
   const isMobile = useMediaQuery({ query: "(max-width: 760px)" });
@@ -25,12 +25,11 @@ const AboutSection = () => {
         trigger: sectionRef.current,
         start: start,
         end: end,
-        scrub: 1, // Smooth scrubbing with slight delay for better performance
+        scrub: true, // Smooth scrubbing with slight delay for better performance
         pin: true,
         anticipatePin: 1, // Smooth pinning transitions
-        markers: false, // Disabled for production
         invalidateOnRefresh: true, // Recalculate on resize
-        refreshPriority: 0, // Standard refresh priority
+   
        
       },
       
@@ -42,23 +41,22 @@ const AboutSection = () => {
       rotate: 180,
       opacity: 1,
       zIndex: 11,
+      // backgroundColor: "var(--primary)",
       backgroundColor: "#61dbfb",
       maskSize: "20%",
       ease: "power1.inOut",
     },).to(".mask-image", {
       maskImage: "none",
+      duration: 0.2,
       ease: "power1.inOut",
-      duration: 0.1,
     },)
     .from(".mask-image-container", {
       backgroundImage: "none",
-      duration: 0.1,
       y:isMobile ? "50%" : "0%",
-      backgroundColor: "blue",
       ease: "power1.inOut",
     },"<")
       .from(".mask-image-container", {
-        duration: 0.5,
+
         x: isMobile ? "0%" : "50%",
         translateX: isMobile ? "0%" : "-50%",
         ease: "power1.inOut",
@@ -78,8 +76,8 @@ const AboutSection = () => {
     };
   }, { scope: sectionRef, dependencies: [] })
   return (
-    <div ref={sectionRef} id="about-section" className="relative layer w-full  radial-gradient snap-start " >
-      <div className=" h-full ">
+    <div ref={sectionRef} id="about-section" className="relative layer w-full  radial-gradient  " >
+      <div className=" h-full container mx-auto overflow-hidden ">
         <div className="mask-container  ">
           <div className="mask-image-container">
           <div className="mask-image">

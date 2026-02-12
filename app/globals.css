@@ -151,7 +151,7 @@ z-index:12;
 }
 
 .mask-container {
-  @apply mx-auto relative w-full h-full flex flex-col sm:flex-row justify-center  items-center my-0 ;
+  @apply mx-auto relative w-full h-full flex flex-col sm:flex-row justify-center  items-center my-0 py-20 ;
 }
 
 .mask-image-container {
