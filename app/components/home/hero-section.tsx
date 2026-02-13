@@ -27,6 +27,18 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
     const start = "top top"
     // const end = mobileWidth ? "bottom+=10%" : "bottom+=50"
     const end = "bottom top"
+    const imageAnimationStyle={
+      right:0,
+      bottom:0,
+      translateX:0,
+      translateY:0,
+      scale:1,
+      ease: "power2.inOut"
+    }
+    const imageOverlayAnimationStyle={
+      opacity:1,
+      ease: "power2.inOut"
+    }
     const containerSize = {
       width: badgesContainerRef?.current?.offsetWidth || 0,
       height: badgesContainerRef?.current?.offsetHeight || 0
@@ -41,8 +53,8 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
 
     const midPoint = mobileWidth ? { x: 0, y: -containerSize.width / 2 - b1Size.width / 2 || 0 } : { x: ((containerSize.width + b1Size.width || 0) / 5 || 0), y: -(containerSize.height / 2 + b1Size.height * 2) || 0 };
     // const startPoint = mobileWidth ? { x: 0, y: -b1Size.height * 1.5 || 0 } : { x: (b1Size.width || 0), y: -(2 * b1Size.height || 0) };
-    const initialPoint = { x: 0, y: 0 };
-    
+    const initialPoint = { x: 5, y: 0 };
+   
 
     const MasterTimeline = gsap.timeline({
       scrollTrigger: {
@@ -50,12 +62,15 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
         start: start,
         end: end,
         pin: true,
-        scrub: true,
+        scrub: 1.5,
         anticipatePin: 1,
         // pinSpacing: true,
       }
     })
-    MasterTimeline.to(".b1", {
+      MasterTimeline.to(".image",{...imageAnimationStyle},)
+      // .to(".Image-overlay",{...imageOverlayAnimationStyle},)
+  
+    .to(".b1", {
       motionPath: {
         path: [
           initialPoint,
@@ -68,13 +83,7 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
       },
       opacity: 1,
       ease: "power2.inOut"
-    }).to(".skill", {
-      text:"Web Developer",
-      duration:0.4,
-      stagger:0.2,
-      ease:"power2.inOut"
-    },"<"
-  )
+    })
     .to(".b2", {
       motionPath: {
         path: [
@@ -86,14 +95,8 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
         curviness: 1.5
       },
       opacity: 1,
-
       ease: "power2.inOut"
-    }).to(".skill", {
-      duration:0.8,
-      text:"Frontend Developer",
-      stagger:0.2,
-      ease:"none"
-    },"<").to(".b3", {
+    }).to(".b3", {
       motionPath: {
         path: mobileWidth ? [
           initialPoint,
@@ -106,20 +109,16 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
       opacity: 1,
       ease: "power2.inOut"
     },)
-    .to(".skill", {
-      duration:0.4,
-      text:"Full Stack Developer",
-      ease:"none"
-    },"<")
+   
   }, { scope: sectionRef });
   return (
     <div ref={sectionRef} id="hero-section" className=" w-full  layer relative sm:py-20 py-10 radial-gradient  ">
       <main className="sm:w-1/2 w-full sm:mr-auto sm:h-full h-[50%] flex flex-row justify-center items-center ">
         <div className="mx-5 sm:mx-15 space-y-5 ">
           <h1 className="text-2xl sm:text-5xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center pt-10 sm:text-left container mx-auto ">Hi,it&apos;s Hein </h1>
-          <h2 className="text-xl sm:text-4xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center sm:text-left container mx-auto skills flex flex-row gap-2 sm:justify-start justify-center items-center">
+          <h2 className="text-xl sm:text-4xl font-bold bg-linear-to-t from-primary to-slate-500 text-transparent bg-clip-text text-center sm:text-left container mx-auto  flex flex-row gap-2 sm:justify-start justify-center items-center">
             I&apos;m 
-            <span className="skill text-center">Web Developer</span>
+            <span className=" text-center">Web Developer</span>
           </h2>
           <section className="container mx-auto space-y-5">
             <p className="text-sm sm:text-base text-center  leading-loose tracking-normal sm:leading-loose sm:tracking-wide sm:text-left container text-muted-foreground mx-auto ">{personalInfo.shortObjectives}</p>
@@ -130,11 +129,11 @@ const HeroSection = ({ ref }: { ref: React.RefObject<HTMLDivElement | null> }) =
         </div>
       </main>
 
-      <div className="absolute bottom-0 h-[50%] w-full sm:h-[80vh]
+      <div className="absolute bottom-0 h-[50%] w-full sm:h-[80vh] 
      ">
-        <div className="relative h-full  w-full sm:w-1/2 ml-auto">
-        <div className="absolute -bottom-10 right-5 aspect-square h-full  z-1 bg-primary/10 rounded-full"></div>
-          <Image src="/hein-no-bg.webp" alt="Hein Htet Paing" className="drop-shadow-primary drop-shadow-2xl object-cover object-top" fill={true} />
+        <div className="relative  image">
+        <div className="Image-overlay"></div>
+          <Image src="/hein-no-bg.webp" alt="Hein Htet Paing" className="absolute  drop-shadow-foreground drop-shadow-2xl object-cover object-top" fill={true} />
          
         </div>
       </div>

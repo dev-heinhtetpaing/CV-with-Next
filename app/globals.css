@@ -167,3 +167,15 @@ z-index:12;
 .mask-content {
   @apply text-muted-foreground w-full sm:w-1/2 h-1/2 px-8 sm:px-16 overflow-hidden;
 }
+
+.image{
+  bottom: 50%;
+  right: 50%;
+ 
+  /* transform: translate(-50%, 50%); */
+  @apply absolute h-full  w-full sm:w-1/2 translate-x-[50%] translate-y-[50%]   scale-120;
+}
+
+.Image-overlay{
+  /* @apply opacity-0 absolute  -bottom-30  -right-18 aspect-square h-[120%] border border-primary/20  z-1 bg-primary/5 rounded-full; */
+}
